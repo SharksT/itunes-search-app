@@ -66,7 +66,7 @@ class App extends React.Component {
               this.setState({
                 data : _.groupBy(tracks,'collectionName'),
                 //data : tracks
-              },this.sortBy('releaseDate'))    
+              })    
           }
           /*this.setState({
             data: responses.results
