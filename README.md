@@ -1,6 +1,6 @@
 # Itunes-Music-Store
 
-# Instal
+# Install
 
 Clone and install via: ``` npm install ``` inside of the folder
 

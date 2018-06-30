@@ -1,22 +1,18 @@
 {
-  "name": "004-using-fetch-to-make-api-calls",
-  "version": "1.0.0",
-  "devDependencies": {
-    "react-scripts": "0.8.4",
-    "react-svg-loader": "^2.1.0",
-    "sw-precache": "^4.2.3"
-  },
+  "name": "itunes-app",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
     "axios": "^0.18.0",
     "lodash": "^4.17.10",
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-scripts": "1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && cp manifest.json build/ && sw-precache --root='build/' --static-file-globs='build/**/!(*map*)'",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "homepage": "./"
+  }
 }

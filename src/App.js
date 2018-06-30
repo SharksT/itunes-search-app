@@ -9,6 +9,7 @@ class App extends Component  {
     this.state = {
       data: [],
       artistName: '',
+      query: ' '
     }
     this.handleKey = this.handleKey.bind(this)
   }
