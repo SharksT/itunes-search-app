@@ -28,7 +28,6 @@ export default function Search(props) {
   }
   let myData = props.search || {}
   return (
-    
   <div className='container'>
     <div className="header">
       <div className="top">
@@ -48,7 +47,6 @@ export default function Search(props) {
         <p className='contactName'>HOANG NGUYEN</p>
         </div>
       </div>
-  { (props.artistName != '') ? 
       <div className="mid">
         <div className="artist">
         <img src={singer} className="imgSinger"/>
@@ -63,7 +61,7 @@ export default function Search(props) {
         </ul>
         </div>
       </div>
-    :null} </div>
+    </div>
         {    
 
             Object.keys(myData).sort(function(a,b){return getYear(myData[b][0]) - getYear(myData[a][0]) }).map(key => {
@@ -88,8 +86,7 @@ export default function Search(props) {
                   </div>
               )
           })
-        }
-     
+        }  
   </div>
   )
 }
