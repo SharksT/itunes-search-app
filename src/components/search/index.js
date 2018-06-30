@@ -5,6 +5,7 @@ import profile from '../media/user-circle-regular.svg'
 import message from '../media/comments-regular.svg'
 import contact from '../media/contact.jpg'
 import arrow from '../media/sort-down-solid.svg'
+import singer from '../media/singer.jpg'
 
 export default function Search(props) {
   const millisToMinutesAndSeconds= (millis) => {
@@ -48,11 +49,13 @@ export default function Search(props) {
       </div>
       <div className="mid">
         <div className="artist">
-        <h2>ArtistName</h2>
+        <img src={singer} className="imgSinger"/>
+        <h2 className="artistName">{props.artistName}</h2>
         </div>
         <div className="menu">
-        <ul>
+        <ul className="subMenu">
           <li className="activeMenu"><a href="#A"> ALBUNS </a></li>
+          <img src ={arrow}className="albumTick"/>
           <li className="menuItem"><a href="#B"> ARTISTAS </a></li>
           <li className="menuItem"><a href="#C"> PLAYLISTS </a></li>
         </ul>

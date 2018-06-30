@@ -8,7 +8,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       data: [],
-      query: '',
+      artistName: '',
       direction: {
         collectionName: 'desc',
       }
@@ -29,7 +29,9 @@ class App extends React.Component {
     .then(response => {
       if (!response.data || !response.data.resultCount) return false;
       const artistId = response.data.results[0].artistId
-      const artistName = response.data.results[0].artistName;
+      this.setState({
+        artistName: response.data.results[0].artistName.toUpperCase()
+      })
       return axios(`https://cors-anywhere.herokuapp.com/https://itunes.apple.com/lookup?id=${artistId}&entity=album`)
     })
     .then(response => {
@@ -57,6 +59,7 @@ class App extends React.Component {
         <Search
           search={this.state.data}
           handleKey={this.handleKey}
+          artistName = {this.state.artistName}
         />
       </div>
     )

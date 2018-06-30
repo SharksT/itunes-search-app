@@ -1,6 +1,5 @@
 /* Classes */
 .container{
-    font-family: sans-serif;
     width: 100%;
     background: #ECF0F1;
     display: flex;
@@ -45,14 +44,14 @@
     margin-bottom: 0;
     display: flex;
     flex-direction: column;
-    height: 10em;
+    height: 25%;
     padding: 0;
 }
 
 .menuItem{
     float: left;
     padding: 0 16px 0 0 ;
-    margin: 3.5% 23px 0 0;
+    margin: 3% 23px 0 0;
     text-align: center;
 }
 .menuItem a{
@@ -66,7 +65,7 @@
     color: black;
     float: left;
     padding: 0 16px 5px 12px ;
-    margin: 3.5% 23px 0 0;
+    margin: 3% 23px 0 0;
     text-align: center;
     border-bottom: 5px solid #67D091;
 }
@@ -106,7 +105,10 @@
 
 /*        Tags         */
 
-body { font-size: 0.8em; }
+body { 
+    font-size: 0.8em; 
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 p{
     display: inline;
@@ -152,6 +154,16 @@ ul {
     width: 20%;
     height: 20%;
 }
+.imgSinger{
+    border-radius: 20em;
+    padding: 0;
+    margin: 1% 0 0 1%;
+    width: 5%;
+    height: 5%;
+}
+.albumTick{
+    display: none;
+}
 .contactName{
     color: #868686;
     padding: 0;
@@ -159,6 +171,13 @@ ul {
     width: 100%;
     text-align: middle;
     font-size: 12px;
+}
+.artistName{
+    color: #33404F;
+    padding: 0;
+    margin: 2.4% 0 0 2%;
+    width: 100%;
+    font-size: 28px;
 }
 .dur{
     color: rgba(0, 0, 0, 0.4);
@@ -233,8 +252,9 @@ input[type=text]:focus {
         width: 40%;
         margin-bottom: 10%;
     }
-
-
+    .subMenu{
+        height: 20%;
+    }
     .arrow{
         align-self: middle;
         display: unset;
@@ -252,13 +272,32 @@ input[type=text]:focus {
         margin:0;
         
     }
-
-
-    .activeMenu a{
-        padding: 0 1em;
+    .artistName{
+        color: #33404F;
+        padding: 0;
+        margin: 25% 0 0 5%;
+        width: 100%;
+        font-size: 28px;
+    }
+    .imgSinger{
+        padding: 0;
         margin: 15% 0 0 0;
+        width: 25%;
+        height: 20%;
+    }
+    .albumTick{
+        padding: 20% 0 0 0;
+        margin: 0 0 0 0;
+        width: 2em;
+        height: 2em;
+        display: unset;
+    }
+    .activeMenu a{
+        padding: 2% 0 3% 5%;
+        margin: 20% 0 0 0;
         border-bottom: none;
         border-left: 5px solid #67D091;
+        font-size: 28px;
     }
     .imgh{
         display: none;
