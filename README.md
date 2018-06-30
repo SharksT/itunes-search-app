@@ -1,9 +1,9 @@
 # Itunes-Music-Store
 
-#Instal
+# Instal
 
-npm install
+Clone and install via npm install inside of the folder
 
-#use
+# How to use 
 
-npm start
+npm start in the folder
