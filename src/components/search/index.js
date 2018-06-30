@@ -33,9 +33,7 @@ export default function Search(props) {
         <div className="side">
         <input
         type="text"
-        onChange={props.handleChange}
-        value={props.value}
-        onKeyUp={props.handleClick}
+        onKeyPress={props.handleKey}
         placeholder="Search.."
          />
         </div>
@@ -49,11 +47,21 @@ export default function Search(props) {
         </div>
       </div>
       <div className="mid">
-      <p>Artist Name</p>
+        <div className="artist">
+        <h2>ArtistName</h2>
+        </div>
+        <div className="menu">
+        <ul>
+          <li className="activeMenu"><a href="#A"> ALBUNS </a></li>
+          <li className="menuItem"><a href="#B"> ARTISTAS </a></li>
+          <li className="menuItem"><a href="#C"> PLAYLISTS </a></li>
+        </ul>
+        </div>
       </div>
     </div>
         {    
-            Object.keys(myData).map(key => {
+
+            Object.keys(myData).sort(function(a,b){return getYear(myData[b][0]) - getYear(myData[a][0]) }).map(key => {
               return (
                   <div className='item' >
                       {getThumbnail(myData[key][0])}
@@ -64,9 +72,9 @@ export default function Search(props) {
                       <h1>{key}</h1>
                       <ul>
                           { myData[key].reduce((acc, track, index) => { 
-                      if(index > 0) { 
+                      if(track.trackCensoredName != null) { 
                           acc.push(
-                          <li><p className="dist">{track.trackCensoredName}</p><p className='dur'>{gettime(track)}</p></li>)
+                          <li className="tracks"><p className="dist">{track.trackCensoredName}</p><p className='dur'>{gettime(track)}</p></li>)
                       }
                       return acc;
                   }, []) }

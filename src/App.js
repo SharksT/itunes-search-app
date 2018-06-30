@@ -13,35 +13,15 @@ class App extends React.Component {
         collectionName: 'desc',
       }
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleClick = this.handleClick.bind(this)
-    this.sortBy = this.sortBy.bind(this)
-  }
-
-  handleChange(e) {
-    this.setState({
-      query: e.target.value
-    })
+    this.handleKey = this.handleKey.bind(this)
   }
 
 
-
-  sortBy(key) {
-    this.setState({
-      data: this.state.data.sort( (a, b) => (
-        this.state.direction[key] === 'asc'
-          ? parseFloat(a[key]) - parseFloat(b[key])
-          : parseFloat(b[key]) - parseFloat(a[key])
-      )),
-      direction: {
-        [key]: this.state.direction[key] === 'asc'
-          ? 'desc'
-          : 'asc'
-      }
-    })
-  }
   
-  handleClick() {
+  handleKey(e) {
+      this.setState({
+        query: e.target.value
+      })
    const search =  this.state.query.split(' ').join('+')
    const api = "https://cors-anywhere.herokuapp.com/https://itunes.apple.com/search?media=music&term="
    const to_fetch = api + search + "&limit=1&wrapperType=track&kind=song"
@@ -49,6 +29,7 @@ class App extends React.Component {
     .then(response => {
       if (!response.data || !response.data.resultCount) return false;
       const artistId = response.data.results[0].artistId
+      const artistName = response.data.results[0].artistName;
       return axios(`https://cors-anywhere.herokuapp.com/https://itunes.apple.com/lookup?id=${artistId}&entity=album`)
     })
     .then(response => {
@@ -56,25 +37,18 @@ class App extends React.Component {
       const data = response.data.results.slice(1)
       let tracks = []
       for (let i = 0; i < data.length; i++) {
-        let album = data[i].collectionName
-        const datatype = {}
         axios(`https://cors-anywhere.herokuapp.com/https://itunes.apple.com/lookup?id=${data[i].collectionId}&entity=song`).then((response) => {
         tracks = tracks.concat(response.data.results)  
-        //const trackAlbum = tracks[0].collectionName
           if(i === (data.length - 1)){
               console.log(_.groupBy(tracks,'collectionName'))
               this.setState({
                 data : _.groupBy(tracks,'collectionName'),
-                //data : tracks
               })    
           }
-          /*this.setState({
-            data: responses.results
-          }),this.sortBy('collectionId')*/
         });
       }
     })
-      
+   
   }
 
   render() {
@@ -82,10 +56,7 @@ class App extends React.Component {
       <div>
         <Search
           search={this.state.data}
-          value={this.state.query}
-          handleChange={this.handleChange}
-          handleClick={this.handleClick}
-          sortBy={this.sortBy}
+          handleKey={this.handleKey}
         />
       </div>
     )
