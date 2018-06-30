@@ -39,7 +39,6 @@ class App extends React.Component {
         axios(`https://cors-anywhere.herokuapp.com/https://itunes.apple.com/lookup?id=${data[i].collectionId}&entity=song`).then((response) => {
         tracks = tracks.concat(response.data.results)  
           if(i === (data.length - 1)){
-              console.log(_.groupBy(tracks,'collectionName'))
               this.setState({
                 data : _.groupBy(tracks,'collectionName'),
               })    
