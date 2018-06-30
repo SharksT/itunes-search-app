@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react';
 import Search from './components/search'
 import axios from 'axios'
 import _ from 'lodash'
 
-class App extends React.Component {
+class App extends Component  {
   constructor(props) {
     super(props)
     this.state = {
