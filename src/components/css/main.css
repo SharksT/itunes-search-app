@@ -1,4 +1,4 @@
-/* Classes */
+/*     Classes      */
 .container{
     width: 100%;
     background: #ECF0F1;
@@ -6,7 +6,6 @@
     flex-direction: column;
     
 }
-
 .container .header{
     background: white;
     width: 100%;
@@ -14,7 +13,7 @@
     flex-direction: column;
     justify-content: space-between;
 }
-
+/*       Header       */
 .header .top{
     display: flex;
     flex-direction: row;
@@ -70,7 +69,6 @@
     border-bottom: 5px solid #67D091;
 }
 
-
 .header .mid .artist{
     display: flex;
 }
@@ -80,6 +78,23 @@
     display: flex;
 }
 
+/*  Search Bar */
+
+input[type=text] {  
+    margin-top: 10%;
+    border: 0; 
+    outline: none;
+    background: url("../media/search-solid.svg") no-repeat left;
+    padding: 5px 5px 2px 30px;
+    width: 0px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+input[type=text]:focus {
+    width: 100%;
+}
+
+/*       Itens      */
 .container .item{
     display: flex;
     background: white;
@@ -132,7 +147,7 @@ ul {
 
 
 
-/*          Miscellanius           */
+/*          Miscellaneous           */
 
 .imgh{
     height: 60%;
@@ -210,24 +225,9 @@ ul {
     display: none;
 }
 
-input[type=text] {  
-    margin-top: 10%;
-    border: 0; 
-    outline: none;
-    background: url("../media/search-solid.svg") no-repeat left;
-    padding: 5px 5px 2px 30px;
-    width: 0px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
-input[type=text]:focus {
-    width: 100%;
-}
-
-/*  Mobile    */
+/*     Mobile    */
 
 @media only screen and (max-width: 1000px) {
-    /* For mobile phones: */
     .container{
         font-family: sans-serif;
         width: 100%;
@@ -246,6 +246,18 @@ input[type=text]:focus {
         margin: 4% 10% 0.1% 10% ;
         
     }
+    .header .top .icons{
+        order: 1;
+        display: flex;
+        width: 100%;
+        margin-left : 20%;
+    }
+    .header .mid{
+        margin:0;
+        
+    }
+
+    /*     Miscellaneous     */
     .imga{
         align-self: center;
         height: 40%;
@@ -261,16 +273,6 @@ input[type=text]:focus {
         height: 2em;
         width: 2em;
         margin-left: 1%;
-    }
-    .header .top .icons{
-        order: 1;
-        display: flex;
-        width: 100%;
-        margin-left : 20%;
-    }
-    .header .mid{
-        margin:0;
-        
     }
     .artistName{
         color: #33404F;
@@ -299,6 +301,7 @@ input[type=text]:focus {
         border-left: 5px solid #67D091;
         font-size: 28px;
     }
+    /*  Disabled   */
     .imgh{
         display: none;
     }

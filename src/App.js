@@ -9,9 +9,6 @@ class App extends React.Component {
     this.state = {
       data: [],
       artistName: '',
-      direction: {
-        collectionName: 'desc',
-      }
     }
     this.handleKey = this.handleKey.bind(this)
   }
