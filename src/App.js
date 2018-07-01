@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Header from './components/header'
-import Search from './components/search'
+import Header from './components/template/header'
+import Search from './components/template/search'
 import axios from 'axios'
 import _ from 'lodash'
 

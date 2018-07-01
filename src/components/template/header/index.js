@@ -1,11 +1,11 @@
 import React from 'react'
-import '../css/main.css';
-import bell from '../media/bell-regular.svg'
-import profile from '../media/user-circle-regular.svg'
-import message from '../media/comments-regular.svg'
-import contact from '../media/contact.jpg'
-import arrow from '../media/sort-down-solid.svg'
-import singer from '../media/singer.jpg'
+import '../../css/main.css';
+import bell from '../../media/bell-regular.svg'
+import profile from '../../media/user-circle-regular.svg'
+import message from '../../media/comments-regular.svg'
+import contact from '../../media/contact.jpg'
+import arrow from '../../media/sort-down-solid.svg'
+import singer from '../../media/singer.jpg'
 
 
 export default function Header(props){
