@@ -5,16 +5,14 @@ import axios from 'axios'
 import _ from 'lodash'
 
 class App extends Component  {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: [],
-      artistName: '',
-      query: ' '
-    }
-    this.handleKey = this.handleKey.bind(this)
+
+  state = {
+    data : [],
+    artistName: '',
+    query: ' '
   }
-  handleKey(e) {
+
+  handleKey = (e) => {
       this.setState({
         query: e.target.value
       })
@@ -38,8 +36,13 @@ class App extends Component  {
         axios(`https://cors-anywhere.herokuapp.com/https://itunes.apple.com/lookup?id=${data[i].collectionId}&entity=song`).then((response) => {
         tracks = tracks.concat(response.data.results)  
           if(i === (data.length - 1)){
-              this.setState({
-                data : _.groupBy(tracks,'collectionName'),
+            const newdata = data
+              this.setState(state =>{
+                if(state.data === newdata){
+                  return null;
+                } else{
+                  return {data : _.groupBy(tracks,'collectionName')}
+                }
               })    
           }
         });
