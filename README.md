@@ -8,6 +8,6 @@ Clone and install via: ``` npm install ``` inside of the folder
 
 ```npm start``` in the folder
 
-#Problems
+# Possible Problem
 
 If you have problems loading the artist albuns, please install this https://goo.gl/oEFLJH as a workaround it.
