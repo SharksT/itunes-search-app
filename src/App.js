@@ -9,13 +9,23 @@ class App extends Component  {
   state = {
     data : [],
     artistName: '',
-    query: ' '
+    query: ' ',
   }
+  handleKey = this.handleKey.bind(this);
 
-  handleKey = (e) => {
+  handleKey(e)
+  {
       this.setState({
         query: e.target.value
       })
+      
+  }
+  shouldComponentUpdate(state,nextState)
+  {
+    return state.data !== nextState.data
+  }
+  handleEnter = (e) => {
+  if ((e.key === 'Enter') | (e.keywich === 13) | (e.keyCode === 13)){ 
    const search =  this.state.query.split(' ').join('+')
    const api = "https://cors-anywhere.herokuapp.com/https://itunes.apple.com/search?media=music&term="
    const to_fetch = api + search + "&limit=1&wrapperType=track&kind=song"
@@ -41,13 +51,15 @@ class App extends Component  {
                 if(state.data === newdata){
                   return null;
                 } else{
-                  return {data : _.groupBy(tracks,'collectionName')}
+                  return {
+                    data : _.groupBy(tracks,'collectionName'),
+                  }
                 }
               })    
           }
         });
       }
-    })
+    })}
    
   }
   render() {
@@ -56,6 +68,7 @@ class App extends Component  {
         <Header 
         artistName = {this.state.artistName}
         handleKey={this.handleKey}
+        handleEnter={this.handleEnter}
         />
         <Search
           search={this.state.data}

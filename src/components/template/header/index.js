@@ -15,7 +15,9 @@ export default function Header(props){
           <div className="side">
           <input
           type="text"
-          onKeyPress={props.handleKey}
+          value= {props.query}
+          onChange = {props.handleKey}
+          onKeyUp={props.handleEnter}
           placeholder="Search.."
            />
           </div>
