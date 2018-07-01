@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from './components/header'
 import Search from './components/search'
 import axios from 'axios'
 import _ from 'lodash'
@@ -13,9 +14,6 @@ class App extends Component  {
     }
     this.handleKey = this.handleKey.bind(this)
   }
-
-
-  
   handleKey(e) {
       this.setState({
         query: e.target.value
@@ -49,14 +47,15 @@ class App extends Component  {
     })
    
   }
-
   render() {
     return (
       <div>
+        <Header 
+        artistName = {this.state.artistName}
+        handleKey={this.handleKey}
+        />
         <Search
           search={this.state.data}
-          handleKey={this.handleKey}
-          artistName = {this.state.artistName}
         />
       </div>
     )
