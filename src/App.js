@@ -3,16 +3,23 @@ import Header from './components/template/header'
 import Search from './components/template/search'
 import axios from 'axios'
 import _ from 'lodash'
-
+import gif from './components/media/Eclipse-1s-200px.gif'
 class App extends Component  {
 
   state = {
     data : [],
     artistName: '',
     query: ' ',
+    loading: true
+  }
+  constructor(props)
+  {
+    super(props)
+    window.myCallback = this.handleEnter;
   }
   handleKey = this.handleKey.bind(this);
-
+  
+ 
   handleKey(e)
   {
       this.setState({
@@ -20,15 +27,18 @@ class App extends Component  {
       })
       
   }
-  shouldComponentUpdate(state,nextState)
+  /*shouldComponentUpdate(state,nextState)
   {
     return state.data !== nextState.data
-  }
+  }*/
+
+  
+
   handleEnter = (e) => {
   if ((e.key === 'Enter') | (e.keywich === 13) | (e.keyCode === 13)){ 
    const search =  this.state.query.split(' ').join('+')
-   const api = "https://cors-anywhere.herokuapp.com/https://itunes.apple.com/search?media=music&term="
-   const to_fetch = api + search + "&limit=1&wrapperType=track&kind=song"
+   const api = "https://itunes.apple.com/search?media=music&term="
+   const to_fetch = api + search + `&limit=1&wrapperType=track&kind=song&callback=myCallback`
    axios(to_fetch)
     .then(response => {
       if (!response.data || !response.data.resultCount) return false;
@@ -49,20 +59,23 @@ class App extends Component  {
             const newdata = data
               this.setState(state =>{
                 if(state.data === newdata){
-                  return null;
+                  return {loading: true}
                 } else{
                   return {
                     data : _.groupBy(tracks,'collectionName'),
+                    loading : false
                   }
                 }
               })    
           }
         });
       }
-    })}
-   
+    })
   }
+  }
+ 
   render() {
+
     return (
       <div>
         <Header 
@@ -70,10 +83,12 @@ class App extends Component  {
         handleKey={this.handleKey}
         handleEnter={this.handleEnter}
         />
+       { ((this.state.loading)) ? <div className='mid'  ><img  src = {gif}/></div>
+        : 
         <Search
-          search={this.state.data}
+        search={this.state.data}
         />
-      </div>
+      }</div>
     )
   }
 }
