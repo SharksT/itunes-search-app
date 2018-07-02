@@ -1,96 +1,88 @@
-import React, { Component } from 'react';
-import Header from './components/template/header'
-import Search from './components/template/search'
-import axios from 'axios'
-import _ from 'lodash'
-import gif from './components/media/Eclipse-1s-200px.gif'
-class App extends Component  {
+import React, { Component } from "react";
+import Header from "./components/template/header";
+import Search from "./components/template/search";
+import axios from "axios";
+import _ from "lodash";
 
+class App extends Component {
   state = {
-    data : [],
-    artistName: '',
-    query: ' ',
-    loading: true
-  }
-  constructor(props)
-  {
-    super(props)
+    data: [],
+    artistName: "",
+    query: " ",
+  };
+  constructor(props) {
+    super(props);
     window.myCallback = this.handleEnter;
   }
   handleKey = this.handleKey.bind(this);
-  
- 
-  handleKey(e)
-  {
-      this.setState({
-        query: e.target.value
-      })
-      
+
+  handleKey(e) {
+    this.setState({
+      query: e.target.value
+    });
   }
-  /*shouldComponentUpdate(state,nextState)
-  {
-    return state.data !== nextState.data
-  }*/
 
-  
-
-  handleEnter = (e) => {
-  if ((e.key === 'Enter') | (e.keywich === 13) | (e.keyCode === 13)){ 
-   const search =  this.state.query.split(' ').join('+')
-   const api = "https://itunes.apple.com/search?media=music&term="
-   const to_fetch = api + search + `&limit=1&wrapperType=track&kind=song&callback=myCallback`
-   axios(to_fetch)
-    .then(response => {
-      if (!response.data || !response.data.resultCount) return false;
-      const artistId = response.data.results[0].artistId
-      this.setState({
-        artistName: response.data.results[0].artistName.toUpperCase()
-      })
-      return axios(`https://cors-anywhere.herokuapp.com/https://itunes.apple.com/lookup?id=${artistId}&entity=album`)
-    })
-    .then(response => {
-      if (!response.data || (response.data.resultCount < 2)) return false;
-      const data = response.data.results.slice(1)
-      let tracks = []
-      for (let i = 0; i < data.length; i++) {
-        axios(`https://cors-anywhere.herokuapp.com/https://itunes.apple.com/lookup?id=${data[i].collectionId}&entity=song`).then((response) => {
-        tracks = tracks.concat(response.data.results)  
-          if(i === (data.length - 1)){
-            const newdata = data
-              this.setState(state =>{
-                if(state.data === newdata){
-                  return {loading: true}
-                } else{
-                  return {
-                    data : _.groupBy(tracks,'collectionName'),
-                    loading : false
+  handleEnter = e => {
+    if ((e.key === "Enter") | (e.keywich === 13) | (e.keyCode === 13)) {
+      const search = this.state.query.split(" ").join("+");
+      const api = "https://cors-anywhere.herokuapp.com/https://itunes.apple.com/search?media=music&term=";
+      const to_fetch =
+        api +
+        search +
+        `&limit=1&wrapperType=track&kind=song&callback=myCallback`;
+      axios(to_fetch)
+        .then(response => {
+          if (!response.data || !response.data.resultCount) return false;
+          const artistId = response.data.results[0].artistId;
+          this.setState({
+            artistName: response.data.results[0].artistName.toUpperCase()
+          });
+          return axios(
+            `https://cors-anywhere.herokuapp.com/https://itunes.apple.com/lookup?id=${artistId}&entity=album`
+          );
+        })
+        .then(response => {
+          if (!response.data || response.data.resultCount < 2) return false;
+          const data = response.data.results.slice(1);
+          let tracks = [];
+          for (let i = 0; i < data.length; i++) {
+            axios(
+              `https://cors-anywhere.herokuapp.com/https://itunes.apple.com/lookup?id=${
+                data[i].collectionId
+              }&entity=song`
+            ).then(response => {
+              tracks = tracks.concat(response.data.results);
+              if (i === data.length - 1) {
+                const newdata = data;
+                this.setState(state => {
+                  if (state.data === newdata) {
+                    return { loading: true };
+                  } else {
+                    return {
+                      data: _.groupBy(tracks, "collectionName")
+                    };
                   }
-                }
-              })    
+                });
+              }
+            });
           }
         });
-      }
-    })
-  }
-  }
- 
-  render() {
+    }
+  };
 
+  render() {
     return (
       <div>
-        <Header 
-        artistName = {this.state.artistName}
-        handleKey={this.handleKey}
-        handleEnter={this.handleEnter}
+        <Header
+          artistName={this.state.artistName}
+          handleKey={this.handleKey}
+          handleEnter={this.handleEnter}
         />
-       { ((this.state.loading)) ? <div className='mid'  ><img  src = {gif}/></div>
-        : 
-        <Search
-        search={this.state.data}
-        />
-      }</div>
-    )
+          <Search search={this.state.data} />
+        
+      </div>
+    );
   }
 }
 
-export default App
+export default App;
