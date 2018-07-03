@@ -10,10 +10,6 @@ class App extends Component {
     artistName: "",
     query: " ",
   };
-  constructor(props) {
-    super(props);
-    window.myCallback = this.handleEnter;
-  }
   handleKey = this.handleKey.bind(this);
 
   handleKey(e) {
@@ -25,7 +21,7 @@ class App extends Component {
   handleEnter = e => {
     if ((e.key === "Enter") | (e.keywich === 13) | (e.keyCode === 13)) {
       const search = this.state.query.split(" ").join("+");
-      const api = "https://cors-anywhere.herokuapp.com/https://itunes.apple.com/search?media=music&term=";
+      const api = "https://sheltered-caverns-93018.herokuapp.com/ttps://itunes.apple.com/search?media=music&term=";
       const to_fetch =
         api +
         search +
@@ -38,7 +34,7 @@ class App extends Component {
             artistName: response.data.results[0].artistName.toUpperCase()
           });
           return axios(
-            `https://cors-anywhere.herokuapp.com/https://itunes.apple.com/lookup?id=${artistId}&entity=album`
+            `https://sheltered-caverns-93018.herokuapp.com/https://itunes.apple.com/lookup?id=${artistId}&entity=album`
           );
         })
         .then(response => {
@@ -47,7 +43,7 @@ class App extends Component {
           let tracks = [];
           for (let i = 0; i < data.length; i++) {
             axios(
-              `https://cors-anywhere.herokuapp.com/https://itunes.apple.com/lookup?id=${
+              `https://sheltered-caverns-93018.herokuapp.com/https://itunes.apple.com/lookup?id=${
                 data[i].collectionId
               }&entity=song`
             ).then(response => {
